@@ -1,0 +1,19 @@
+#log {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    right: 0em;
+    bottom: 3em;
+    overflow: auto;
+}
+#form {
+    position: absolute;
+    bottom: 1em;
+    width: 95%;
+}
+#message {
+    width: 80%;
+}
+#btn {
+    width: 15%;
+}
