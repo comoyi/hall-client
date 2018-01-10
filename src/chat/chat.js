@@ -9,6 +9,7 @@ class Chat extends React.Component {
     }
 
     start() {
+        console.log('ws start');
         window.onload = function () {
             var connect;
 
@@ -55,7 +56,7 @@ class Chat extends React.Component {
     render() {
         return (
             <div>
-                chat
+                Chat
                 <div id="log"></div>
                 <form id="form">
                     <input id="message" type="text"/>
