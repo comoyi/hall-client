@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.css';
-import Chat from './chat/chat'
-import Nav from './nav'
+import Chat from './chat/Chat'
+import Nav from './Nav'
 import { Switch, Route } from 'react-router-dom'
-import Home from './home'
-import User from './user'
+import Home from './Home'
+import User from './User'
 
 class App extends React.Component {
     render() {
