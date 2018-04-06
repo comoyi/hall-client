@@ -22,7 +22,6 @@ class MessageList extends React.Component {
         });
         return (
             <div>
-                消息列表
                 {lists}
             </div>
         );

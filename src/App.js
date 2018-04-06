@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.css';
-import Chat from './chat/Chat'
-import Nav from './Nav'
+import Chat from './components/chat/Chat'
+import Nav from './components/nav/Nav'
 import { Switch, Route } from 'react-router-dom'
-import Home from './Home'
-import User from './User'
+import Home from './components/home/Home'
+import User from './components/user/User'
 
 class App extends React.Component {
     render() {
@@ -12,9 +12,10 @@ class App extends React.Component {
             <div>
                 <Nav/>
                 <Switch>
-                    <Route exact path='/' component={Home}/>
+                    <Route path='/home' component={Home}/>
                     <Route path='/chat' component={Chat}/>
                     <Route path='/user' component={User}/>
+                    <Route component={Chat}/>
                 </Switch>
             </div>
         );

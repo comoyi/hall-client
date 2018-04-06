@@ -11,6 +11,17 @@ class Chat extends React.Component {
             connect: null,
             messages: [],
         };
+
+        this.messageListRef = (el) => {
+            this.messageList = el;
+        }
+
+        this.messageInputRef = (el) => {
+            this.messageInput = el;
+        }
+
+        this.handleSendMessage = this.handleSendMessage.bind(this);
+        this.handleMessageInputChange = this.handleMessageInputChange.bind(this);
     }
 
     componentDidMount() {
@@ -24,21 +35,28 @@ class Chat extends React.Component {
         this.setState({
             connect: server,
         });
+        this.messageInput.focus();
+    }
+
+    componentWillUnmount() {
+        this.state.connect.close();
     }
 
     onMessage(ev) {
         var data = ev.data;
         var message = JSON.parse(data);
         this.setState(preState => ({
-            messages: [...preState.messages, message],
+            // messages: [...preState.messages, message],
+            messages: preState.messages.concat(message),
         }));
+        this.messageList.scrollTop = this.messageList.firstChild.clientHeight;
     }
 
     onClose(ev) {
-        alert("Connection closed");
+        console.log("Connection closed");
     }
 
-    handleChange(e) {
+    handleMessageInputChange(e) {
         this.setState({
             input: e.target.value,
         });
@@ -60,20 +78,21 @@ class Chat extends React.Component {
         this.setState({
             input: "",
         });
+        this.messageInput.focus();
     }
 
     render() {
         return (
             <div>
                 Chat
-                <div>
+                <div id="message-list" ref={this.messageListRef}>
                     <MessageList
                         messages={this.state.messages}
                     />
                 </div>
-                <form id="form" onSubmit={(e) => this.handleSendMessage(e)}>
-                    <input id="message" type="text" value={this.state.input} onChange={(e) => this.handleChange(e)} />
-                    <input id="btn" type="submit" value="Send" />
+                <form id="form" onSubmit={this.handleSendMessage}>
+                    <input id="message" type="text" ref={this.messageInputRef} value={this.state.input} onChange={this.handleMessageInputChange} />
+                    <input id="btn-send" type="submit" value="Send" />
                 </form>
             </div>
         );
