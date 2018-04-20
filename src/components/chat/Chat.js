@@ -44,7 +44,9 @@ class Chat extends React.Component {
 
     onMessage(ev) {
         var data = ev.data;
-        var message = JSON.parse(data);
+        var packet = JSON.parse(data);
+        // TODO 根据消息包数据做具体操作，目前全部消息作为聊天内容
+        var message = packet.data[0].msg; // 目前一个包一条消息，也不考虑cmd
         this.setState(preState => ({
             // messages: [...preState.messages, message],
             messages: preState.messages.concat(message),
@@ -74,7 +76,22 @@ class Chat extends React.Component {
             'type': 1,
             'content': this.state.input,
         };
-        this.state.connect.send(JSON.stringify(message));
+        // TODO 完善消息包数据
+        var packet = {
+            "packageId":"",
+            "clientId":"",
+            "packageType":"",
+            "token":"",
+            "data":[
+                // {"cmd":"Ping"},
+                // 目前一个包一条消息
+                {
+                    "cmd":"GlobalMessage",
+                    "msg": message
+                }
+            ]
+        };
+        this.state.connect.send(JSON.stringify(packet));
         this.setState({
             input: "",
         });
