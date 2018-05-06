@@ -10,6 +10,7 @@ class Nav extends React.Component {
                     <li><Link to='/home'>Home</Link></li>
                     <li><Link to='/chat'>Chat</Link></li>
                     <li><Link to='/user'>User</Link></li>
+                    <li><Link to='/simulator'>Simulator</Link></li>
                 </ul>
             </div>
         );
